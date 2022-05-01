@@ -7,7 +7,7 @@ This is the second Project of Front End Web Developer Nanodegree Program from Ud
 
 - References and Sourses
 
-    - [Udacity Weather-Journal-Appstarter code](https://github.com/udacity/fend/tree/refresh-2019/projects/weather-journal-app)
+    - [Udacity Weather-Journal-App starter code](https://github.com/udacity/fend/tree/refresh-2019/projects/weather-journal-app)
     - [Weather API](https://openweathermap.org/api)
 
 
