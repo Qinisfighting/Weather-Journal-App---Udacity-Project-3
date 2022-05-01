@@ -68,7 +68,6 @@ app.post('/addData', (req,res) => {
     temp: req.body.temp,
     feelings: req.body.feelings,
     }
-  
-    projectData.push(newEntry)
+    projectData = newEntry;
     res.send(projectData)
 })

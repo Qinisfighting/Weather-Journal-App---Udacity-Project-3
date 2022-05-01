@@ -1,5 +1,6 @@
 /* Global Variables */
 
+
 // Create a new date instance dynamically with JS
 
 const d = new Date();
@@ -28,14 +29,14 @@ function performAction(e) {
 
   getWeather(baseURL, newZip, apiKey)
     .then(function (data) {
-      postData("/addData", {
+      return postData("/addData", {
         name: data.name,
         date: newDate,
         temp: data.main.temp,
         feelings: feelings
       });
     })
-    .then(updateUI());
+    .then(() => updateUI()); 
 }
 
 // Function to GET Web API Data
@@ -46,7 +47,7 @@ const getWeather = async (baseURL, newZip, apiKey) => {
   try {
     const allData = await request.json();
 
-    //alert with statues of 404
+    //alert with statues of 404 and 400
 
     if (allData.message) {
       alert(allData.message);
@@ -59,7 +60,7 @@ const getWeather = async (baseURL, newZip, apiKey) => {
 };
 
 // Function to POST data
-//code reference:https://classroom.udacity.com/nanodegrees/nd0011/parts/cd0429/modules/d153872b-b417-4f32-9c77-d809dc21581d/lessons/ls1846/concepts/6931a2aa-e847-4973-bb74-bb70e71b36a0
+// code reference:https://classroom.udacity.com/nanodegrees/nd0011/parts/cd0429/modules/d153872b-b417-4f32-9c77-d809dc21581d/lessons/ls1846/concepts/6931a2aa-e847-4973-bb74-bb70e71b36a0
 
 const postData = async (url = "", data = {}) => {
   const res = await fetch(url, {
@@ -73,7 +74,7 @@ const postData = async (url = "", data = {}) => {
 
   try {
     const newData = await res.json();
-    console.log(newData);
+    //console.log(newData);
     return newData;
   } catch (error) {
     console.log("error", error);
@@ -81,19 +82,20 @@ const postData = async (url = "", data = {}) => {
 };
 
 //Function to GET Project Data
+//code reference: https://classroom.udacity.com/nanodegrees/nd0011/parts/cd0429/modules/d153872b-b417-4f32-9c77-d809dc21581d/lessons/ls1846/concepts/06b6f9e9-221f-4668-8d13-a70346b293d2
 
 const updateUI = async () => {
   const req = await fetch("/all");
   try {
     // Transform into JSON
     const allData = await req.json();
-    console.log(allData);
-    // Write updated data to DOM elements
-    document.getElementById("name").innerHTML = allData[120].name;
-    document.getElementById("date").innerHTML = allData[120].date;
+   // console.log(allData);
+   // Write updated data to DOM elements
+    document.getElementById("name").innerHTML = allData.name;
+    document.getElementById("date").innerHTML = allData.date;
     document.getElementById("temp").innerHTML =
-      Math.round(allData[120].temp) + " degrees fahrenheit";
-    document.getElementById("content").innerHTML = "I am feeling "+allData[120].feelings;
+      Math.round(allData.temp) + " degrees fahrenheit";
+    document.getElementById("content").innerHTML = "I am feeling "+allData.feelings;
   } catch (error) {
     console.log("error", error);
     // appropriately handle the error
